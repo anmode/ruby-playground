@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Incident Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .form-container {
+      margin-top: 20px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-group input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .message {
+      color: #007bff;
+    }
+    .error-message {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Welcome to Incident Management System</h1>
+
+  <div class="form-group">
+    <%= form_tag({controller: "incidents", action: "new"}, method: "post", class: "form-inline") do %>
+      <%= select_tag :incident_id, options_for_select(@incidents.map{ |incident| [incident.inc_id, incident.id] }), class: "form-control", id: "incident-select" %>
+      <%= submit_tag "Register Incident", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+<div class="form-container">
+  <h2>Register Incident</h2>
+  <%= form_tag({controller: "incidents", action: "create"}, method: "post", class: "form", multipart: true) do %>
+    <div class="form-group">
+      <%= label_tag "csv_file", "Upload CSV File" %>
+      <%= file_field_tag "csv_file", accept: ".csv", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag "email_template", "Email Template Body" %>
+      <%= text_area_tag "email_template", nil, class: "form-control", rows: 5 %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Submit", class: "btn btn-success", disabled: true, id: "submit-btn" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const incidentSelect = document.getElementById('incident-select');
+    const submitBtn = document.getElementById('submit-btn');
+    const formContainer = document.querySelector('.form-container');
+
+    incidentSelect.addEventListener('change', function() {
+      if (incidentSelect.value) {
+        submitBtn.disabled = false;
+        formContainer.style.opacity = '1';
+        formContainer.style.pointerEvents = 'auto';
+        alert('Incident selected!');
+      } else {
+        submitBtn.disabled = true;
+        formContainer.style.opacity = '0.5';
+        formContainer.style.pointerEvents = 'none';
+      }
+    });
+  });
+</script>
+
+</div>
+
+</body>
+</html>
