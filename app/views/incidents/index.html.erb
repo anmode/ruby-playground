@@ -1,14 +1,74 @@
-<p style="color: green"><%= notice %></p>
+<style>
+  /* Notice styling */
+  .notice {
+    color: green;
+    margin-bottom: 20px;
+  }
+
+  /* Incident container styling */
+  .incident {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+
+  /* Incident details styling */
+  .incident-details {
+    margin-bottom: 10px;
+  }
+
+  .incident-details p {
+    margin: 5px 0;
+  }
+
+  /* Link styling */
+  .incident-link {
+    color: blue;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .incident-link:hover {
+    text-decoration: underline;
+    color: #1a4da0;
+  }
+
+  /* New incident button styling */
+  .new-incident-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .new-incident-btn:hover {
+    background-color: #45a049;
+  }
+</style>
+
+<p class="notice"><%= notice %></p>
 
 <h1>Incidents</h1>
 
 <div id="incidents">
   <% @incidents.each do |incident| %>
-    <%= render incident %>
-    <p>
-      <%= link_to "Show this incident", incident %>
-    </p>
+    <div class="incident">
+      <div class="incident-details">
+        <p><strong>Incident ID:</strong> <%= incident.inc_id %></p>
+        <p><strong>Description:</strong> <%= incident.desc %></p>
+        <p><strong>User Name:</strong> <%= incident.user_name %></p>
+      </div>
+      <p>
+        <%= link_to "Show this incident", incident, class: "incident-link" %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New incident", new_incident_path %>
+<%= link_to "New incident", new_incident_path, class: "new-incident-btn" %>

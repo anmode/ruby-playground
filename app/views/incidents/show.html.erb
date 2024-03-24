@@ -1,10 +1,52 @@
-<p style="color: green"><%= notice %></p>
+<style>
+  /* Notice styling */
+  .notice {
+    color: green;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
 
-<%= render @incident %>
+  /* Incident container styling */
+  .incident-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+
+  /* Link styling */
+  .incident-link {
+    color: blue;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .incident-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Button styling */
+  .destroy-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .destroy-button:hover {
+    background-color: #c82333;
+  }
+</style>
+
+<p class="notice"><%= notice %></p>
+
+<%= render @incident, class: "incident-container" %>
 
 <div>
-  <%= link_to "Edit this incident", edit_incident_path(@incident) %> |
-  <%= link_to "Back to incidents", incidents_path %>
-
-  <%= button_to "Destroy this incident", @incident, method: :delete %>
+  <%= link_to "Edit this incident", edit_incident_path(@incident), class: "incident-link" %>
+  <%= link_to "Back to incidents", incidents_path, class: "incident-link" %>
+  <%= button_to "Destroy this incident", @incident, method: :delete, class: "destroy-button" %>
 </div>

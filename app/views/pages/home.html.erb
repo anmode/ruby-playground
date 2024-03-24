@@ -9,6 +9,9 @@
       padding: 0;
       background-color: #f4f4f4;
     }
+    form {
+        width: 400px;
+    }
     .container {
       max-width: 800px;
       margin: 20px auto;
@@ -16,6 +19,8 @@
       background-color: #fff;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
     }
     h1, h2 {
       color: #333;
@@ -24,6 +29,11 @@
       margin-top: 20px;
       opacity: 0.5;
       pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .form-inline{
+          display: flex;
+      justify-content: space-between;
     }
     .form-group {
       margin-bottom: 20px;
@@ -40,9 +50,17 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     .form-group input[type="submit"]:hover {
       background-color: #45a049;
+    }
+    .form-group input[type="submit"]:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .form-group input[type="submit"]:disabled:hover {
+      background-color: #ccc;
     }
     .message {
       color: #007bff;
@@ -50,23 +68,39 @@
     .error-message {
       color: #dc3545;
     }
+
+    /* New CSS for hover effects */
+    .form-group input[type="submit"]:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+    }
+
+    /* Animation for form container */
+    .form-container:hover {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="title">
   <h1>Welcome to Incident Management System</h1>
-
-  <div class="form-group">
-    <%= form_tag({controller: "incidents", action: "new"}, method: "post", class: "form-inline") do %>
-      <%= select_tag :incident_id, options_for_select(@incidents.map{ |incident| [incident.inc_id, incident.id] }), class: "form-control", id: "incident-select" %>
-      <%= submit_tag "Register Incident", class: "btn btn-primary" %>
-    <% end %>
   </div>
+
+  <div class="form">
+
+    <div class="form-group">
+  <%= form_tag({controller: "incidents", action: "new"}, method: "post", class: "form-inline") do %>
+    <%= select_tag :incident_id, options_for_select(@incidents.map{ |incident| [incident.inc_id, incident.id] }), class: "form-control", id: "incident-select" %>
+    <%= submit_tag "Register Incident", class: "btn btn-primary", id: "register-incident-btn" %>
+  <% end %>
+</div>
+
 
 <div class="form-container">
   <h2>Register Incident</h2>
-  <%= form_tag({controller: "incidents", action: "create"}, method: "post", class: "form", multipart: true) do %>
+  <%= form_tag({controller: "incidents", action: "new"},  class: "form", multipart: true) do %>
     <div class="form-group">
       <%= label_tag "csv_file", "Upload CSV File" %>
       <%= file_field_tag "csv_file", accept: ".csv", class: "form-control" %>
@@ -81,11 +115,19 @@
   <% end %>
 </div>
 
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const incidentSelect = document.getElementById('incident-select');
     const submitBtn = document.getElementById('submit-btn');
     const formContainer = document.querySelector('.form-container');
+
+     const registerIncidentBtn = document.getElementById('register-incident-btn');
+
+    registerIncidentBtn.addEventListener('click', function() {
+      window.location.href = '/incidents/new';
+    });
 
     incidentSelect.addEventListener('change', function() {
       if (incidentSelect.value) {

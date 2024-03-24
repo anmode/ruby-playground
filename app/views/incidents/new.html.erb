@@ -1,9 +1,60 @@
-<h1>New incident</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Incident</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
 
-<%= render "form", incident: @incident %>
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-<br>
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
 
-<div>
-  <%= link_to "Back to incidents", incidents_path %>
+    .form-container {
+      margin-bottom: 20px;
+    }
+
+    .back-link {
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>New Incident</h1>
+
+  <div class="form-container">
+    <%= render "form", incident: @incident %>
+  </div>
+
+  <div class="back-link">
+    <%= link_to "Back to Incidents", incidents_path %>
+  </div>
 </div>
+
+</body>
+</html>

@@ -1,4 +1,24 @@
-<div id="<%= dom_id incident %>">
+<style>
+  /* Incident container styling */
+  .incident-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+
+  /* Incident details styling */
+  .incident-details p {
+    margin: 10px 0;
+  }
+
+  .incident-details strong {
+    color: #333;
+  }
+</style>
+
+<div id="<%= dom_id incident %>" class="incident-container">
   <p>
     <strong>Inc:</strong>
     <%= incident.inc_id %>
@@ -13,5 +33,4 @@
     <strong>User name:</strong>
     <%= incident.user_name %>
   </p>
-
 </div>

@@ -1,10 +1,41 @@
-<h1>Editing incident</h1>
+<style>
+  /* Container styling */
+  .edit-incident-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
-<%= render "form", incident: @incident %>
+  /* Heading styling */
+  .edit-incident-container h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
 
-<br>
+  /* Link styling */
+  .edit-incident-container a {
+    color: blue;
+    text-decoration: none;
+    margin-right: 10px;
+  }
 
-<div>
-  <%= link_to "Show this incident", @incident %> |
-  <%= link_to "Back to incidents", incidents_path %>
+  .edit-incident-container a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="edit-incident-container">
+  <h1>Editing incident</h1>
+
+  <%= render "form", incident: @incident %>
+
+  <br>
+
+  <div>
+    <%= link_to "Show this incident", @incident %> |
+    <%= link_to "Back to incidents", incidents_path %>
+  </div>
 </div>
